@@ -19,15 +19,22 @@ connection.connect((error) => {
 });
 
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname,'public')));
+
+app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
   let sql = "SELECT * FROM items";
   let query = connection.query(sql, (err, rows) => {
-    if(err) throw err;
+    if (err) throw err;
     res.render("index", {
       title: "CRUD Inventory",
       items: rows,
     });
+  });
+});
+app.get("/add", (req, res) => {
+  res.render("add", {
+    title: "Add an Item",
   });
 });
 
