@@ -1,0 +1,54 @@
+<%- include('partials/head')%>
+
+<div class="container">
+  <h1><%=title%></h1>
+  <form class="w-50" method="put"  action="<%=`/edit/${id}}` %>">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        value="<%=`${name}` %>"
+        id="name"
+        name="nameInput"
+        placeholder="Name of Item"
+      />
+      <div class="row">
+        <div class="col">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input
+            required
+            type="number"
+            value="<%=`${qty}` %>"
+            min="1"
+            class="form-control"
+            name="qtyInput"
+            aria-label="Amount (to the nearest dollar)"
+          />
+        </div>
+        <div class="col">
+          <label for="quantity" class="form-label">Amount</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">₱</span>
+            <input
+              required
+              type="text"
+              class="form-control"
+              value="<%=`${amount}` %>"
+              name="amtInput"
+              aria-label="Amount (to the nearest dollar)"
+            />
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row-reverse">
+      <a href="/" class="btn btn-danger mx-1">Cancel</a>
+      <button type="submit" class="btn btn-success">Edit</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer')%>

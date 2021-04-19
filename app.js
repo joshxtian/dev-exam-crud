@@ -42,6 +42,24 @@ app.get("/add", (req, res) => {
   });
 });
 
+app.get("/edit/:id",(req,res)=>{
+  const {id} = req.params;
+  let sql = "SELECT * FROM items WHERE id =" + id;
+  const query = connection.query(sql, id, (err, results) => {
+    if (err) throw err;
+    const {id, name, qty, amount} = results[0];
+    res.render("edit",{
+      title:"Edit "+ name + " item",
+      id:id,
+      name:name,
+      qty:qty,
+      amount:amount
+    })
+  });
+});
+
+
+
 app.post("/save", (req, res) => {
   const { nameInput, qtyInput, amtInput } = req.body;
   console.log(req.body);
@@ -55,6 +73,24 @@ app.post("/save", (req, res) => {
     if (err) throw err;
     res.redirect("/");
   });
+
+});
+
+
+app.post("/edit/:id", (req, res) => {
+  const {id} = req.params;
+  const { nameInput, qtyInput, amtInput } = req.body;
+  const data = {
+    name: nameInput,
+    qty: qtyInput,
+    amount: amtInput,
+  };
+  let sql = "UPDATE items SET ? WHERE id =" + id;
+  const query = connection.query(sql, data, (err, results) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
+
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));

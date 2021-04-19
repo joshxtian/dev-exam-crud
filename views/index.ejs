@@ -14,19 +14,21 @@
           </tr>
         </thead>
         <tbody>
-          <% items.forEach(element => {%>
+          <% items.forEach(item => {%>
             <tr>
-              <td><%=element.id%></td>
-              <td><%=element.name%></td>
-              <td><%=element.qty%></td>
-              <td><%=element.amount%></td>
-              <td style="">
-                <button
-                  style="background-color: green; color: white; border: none"
+              <td><%=item.id%></td>
+              <td><%=item.name%></td>
+              <td><%=item.qty%></td>
+              <td><%=item.amount%></td>
+              <td>
+                <a
+                href="<%=`edit/${item.id}` %>"
+                style="background-color: green; color: white; border: none"
+                class="btn btn-success"
                 >
                   Edit
-                </button>
-                <button style="background-color: red; color: white; border: none">
+              </a>
+                <button class="btn btn-success" style="background-color: red; color: white; border: none">
                   Delete
                 </button>
               </td>
