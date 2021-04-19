@@ -4,6 +4,7 @@ const ejs = require("ejs");
 const connectDB = require("./config/connectDB");
 const { viewItems } = require("./controllers/itemsController");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -21,6 +22,9 @@ connection.connect((error) => {
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded());
+
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   let sql = "SELECT * FROM items";
@@ -35,6 +39,21 @@ app.get("/", (req, res) => {
 app.get("/add", (req, res) => {
   res.render("add", {
     title: "Add an Item",
+  });
+});
+
+app.post("/save", (req, res) => {
+  const { nameInput, qtyInput, amtInput } = req.body;
+  console.log(req.body);
+  const data = {
+    name: nameInput,
+    qty: qtyInput,
+    amount: amtInput,
+  };
+  let sql = "INSERT INTO items SET ?";
+  const query = connection.query(sql, data, (err, results) => {
+    if (err) throw err;
+    res.redirect("/");
   });
 });
 
