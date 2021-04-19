@@ -90,7 +90,19 @@ app.post("/edit/:id", (req, res) => {
     if (err) throw err;
     res.redirect("/");
   });
-
 });
+
+app.get("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  let sql = `DELETE FROM items WHERE id = ${id}`;
+  const query = connection.query(sql,id,(err, results) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
+});
+
+
+
+
 
 app.listen(3000, () => console.log("Server running on port 3000"));
