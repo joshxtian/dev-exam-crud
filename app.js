@@ -78,14 +78,14 @@ app.post("/save", (req, res) => {
 
 
 app.post("/edit/:id", (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const { nameInput, qtyInput, amtInput } = req.body;
   const data = {
     name: nameInput,
     qty: qtyInput,
     amount: amtInput,
   };
-  let sql = "UPDATE items SET ? WHERE id =" + id;
+  let sql = `UPDATE items SET ? WHERE id = ${id}`;
   const query = connection.query(sql, data, (err, results) => {
     if (err) throw err;
     res.redirect("/");
