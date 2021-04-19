@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="title" style="text-align: center"><%= title %></h1>
+    <table style="border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>qty</th>
+          <th>amount</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(element => {%>
+          <tr>
+            <td><%=element.id%></td>
+            <td><%=element.name%></td>
+            <td><%=element.qty%></td>
+            <td><%=element.amount%></td>
+            <td style="">
+              <button style="background-color:green;color:white;border:none">Edit</button>
+              <button style="background-color:red;color:white;border:none">Delete</button>
+            </td>
+          </tr>
+        <% });%>
+      </tbody>
+    </table>
+  </body>
+</html>
